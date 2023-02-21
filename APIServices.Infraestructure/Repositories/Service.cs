@@ -33,7 +33,7 @@ namespace APIServices.Infraestructure.Repositories
             var valid = await _unitofWork.UsersRepository.GetById(Id);
             if(valid == null)
             {
-                throw new BusinessException("El usuario no existe");
+                throw new BusinessException("El Usuario No Existe");
             }
             return await _unitofWork.UsersRepository.GetById(Id);
         }
@@ -48,7 +48,7 @@ namespace APIServices.Infraestructure.Repositories
             }
             if (listUser.Any(item => item.Correo == usuario.Correo))
             {
-                throw new BusinessException("El correo ya existe");
+                throw new BusinessException("El Correo Ya Existe, Ingrese otro.");
             }
 
             await _unitofWork.UsersRepository.Add(usuario);
@@ -63,11 +63,11 @@ namespace APIServices.Infraestructure.Repositories
             var usuario = await _unitofWork.UsersRepository.FindByCondition(expression);
             if (usuario.Where(item => item.Usuario == usuarios.Usuario && item.Id != usuarios.Id).Any())
             {
-                throw new BusinessException("EstE Usuario Ya Existe");
+                throw new BusinessException("Este Usuario Ya Existe");
             }
             if (usuario.Any(item => item.Correo == usuarios.Correo && item.Id != usuarios.Id))
             {
-                throw new BusinessException("El correo ya existe");
+                throw new BusinessException("El Correo Ya Existe");
             }
 
             await _unitofWork.UsersRepository.Update(usuarios);
@@ -108,7 +108,7 @@ namespace APIServices.Infraestructure.Repositories
             var valid = await _unitofWork.ClienteEmpRepository.GetById(IdEmpresa);
             if (valid == null)
             {
-                throw new BusinessException("La empresa no existe");
+                throw new BusinessException("La Empresa No Existe");
             }
             return await _unitofWork.ClienteEmpRepository.GetById(IdEmpresa);
         }
@@ -123,7 +123,7 @@ namespace APIServices.Infraestructure.Repositories
             }
             if (listUser.Any(item => item.Correo == cliente.Correo))
             {
-                throw new BusinessException("El correo ya existe");
+                throw new BusinessException("El Correo Ya Existe");
             }
 
             await _unitofWork.ClienteEmpRepository.Add(cliente);
@@ -137,11 +137,11 @@ namespace APIServices.Infraestructure.Repositories
             var empresa = await _unitofWork.ClienteEmpRepository.FindByCondition(expression);
             if (empresa.Where(item => item.NombreFiscal == cliente.NombreFiscal && item.Id != cliente.Id).Any())
             {
-                throw new BusinessException("Esta empresa ya existe");
+                throw new BusinessException("Esta Empresa Ya Existe");
             }
             if (empresa.Any(item => item.Correo == cliente.Correo && item.Id != cliente.Id))
             {
-                throw new BusinessException("El correo ya existe");
+                throw new BusinessException("El Correo Ya Existe");
             }
 
             await _unitofWork.ClienteEmpRepository.Update(cliente);
@@ -153,7 +153,7 @@ namespace APIServices.Infraestructure.Repositories
             var valid = await _unitofWork.ClienteEmpRepository.GetById(IdEmpresa);
             if (valid == null)
             {
-                throw new BusinessException("La empresa no existe");
+                throw new BusinessException("La Empresa No Existe");
             }
             await _unitofWork.ClienteEmpRepository.Delete(IdEmpresa);
 

@@ -10,8 +10,8 @@ namespace APIServices.Infraestructure.Validators
             RuleFor(usuario => usuario.Contra)
                 .NotNull()
                 //Condicion de caracteres
-                //.Length(10, 20);
-                .Length(3, 5);
+                .Length(8, 14);
+                //.Length(3, 5);
 
         }
 
