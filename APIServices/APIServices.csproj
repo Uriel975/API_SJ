@@ -19,5 +19,9 @@
     <ProjectReference Include="..\APIServices.Infraestructure\APIServices.Infraestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\PDFs\" />
+  </ItemGroup>
+
 
 </Project>

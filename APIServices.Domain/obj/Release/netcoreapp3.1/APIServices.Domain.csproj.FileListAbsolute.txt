@@ -1,0 +1,10 @@
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\bin\Release\netcoreapp3.1\APIServices.Domain.deps.json
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\bin\Release\netcoreapp3.1\APIServices.Domain.dll
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\bin\Release\netcoreapp3.1\APIServices.Domain.pdb
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.csproj.AssemblyReference.cache
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.AssemblyInfoInputs.cache
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.AssemblyInfo.cs
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.csproj.CoreCompileInputs.cache
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.dll
+D:\Prueba API\JordanApi\APIServices\APIServices.Domain\obj\Release\netcoreapp3.1\APIServices.Domain.pdb

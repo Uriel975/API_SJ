@@ -3,6 +3,7 @@ using APIServices.Domain.Exceptions;
 using APIServices.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -214,6 +215,12 @@ namespace APIServices.Infraestructure.Repositories
             return rows > 0;
         }
 
+        public async Task<bool> ExisteFolio(string folio)
+        {
+            Expression<Func<OrdenCompra, bool>> expression = item => item.Folio == folio;
+            var exists = await _unitofWork.OrdenCompraRepository.FindByCondition(expression);
+            return exists.Where(o => o.Folio == folio).Any();
+        }
         #endregion
 
 

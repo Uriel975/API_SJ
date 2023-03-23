@@ -1,4 +1,5 @@
 ﻿using APIServices.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -42,6 +43,7 @@ namespace APIServices.Domain.Services
         Task<bool> InsertOrden(OrdenCompra ordenCompra);
         Task UpdateOrden(OrdenCompra ordenCompra);
         Task<bool> DeleteOrden(int IdCompra);
+        Task<bool> ExisteFolio(string folio);
         #endregion
 
 

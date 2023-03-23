@@ -30,6 +30,11 @@ namespace APIServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Ruta de archivos
+            services.AddDirectoryBrowser();
+
+
+
             // Se agrega la instancia de Automapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -96,6 +101,11 @@ namespace APIServices
 
             app.UseHttpsRedirection();
 
+            //Dos nuevos
+            app.UseStaticFiles();
+
+            app.UseDirectoryBrowser();
+            //
             app.UseRouting();
 
             app.UseAuthentication();

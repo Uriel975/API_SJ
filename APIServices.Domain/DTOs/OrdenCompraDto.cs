@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,7 @@ namespace APIServices.Domain.DTOs
         public string Serie { get; set; }
         public int? Fkempresa { get; set; }
         public string PDFRoute { get; set; }
+
+        public IFormFile Pdf { get; set; }
     }
 }
