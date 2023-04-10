@@ -34,7 +34,7 @@ namespace APIServices.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrden()
         {
-            var ordenes = await _OrdenService.GetOrden();
+            var ordenes =  _OrdenService.GetOrden();
             var OrdenesDto = _mapper.Map<IEnumerable<OrdenCompraDto>>(ordenes);
             for (int i = 0; i < OrdenesDto.Count(); i++)
             {

@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Uriel Xool\Documents\Ingenieria\APISomme</_PublishTargetUrl>
-    <History>True|2023-02-22T23:38:43.7080560Z;</History>
+    <History>True|2023-03-23T04:25:53.3074708Z;True|2023-02-22T17:38:43.7080560-06:00;</History>
   </PropertyGroup>
 </Project>

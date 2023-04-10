@@ -33,7 +33,7 @@ namespace APIServices.Controllers
         public async Task<IActionResult> GetUsuarios()
         {
 
-            var usuarios = await _usuariosService.GetUsuarios();
+            var usuarios =  _usuariosService.GetUsuarios();
             var UsuariosDto = _mapper.Map<IEnumerable<UsuariosDto>>(usuarios);
             var response = new ApiResponse<IEnumerable<UsuariosDto>>(UsuariosDto);
             return Ok(response);

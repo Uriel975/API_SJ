@@ -13,6 +13,7 @@ namespace APIServices.Domain.DTOs
         public string Serie { get; set; }
         public int? Fkempresa { get; set; }
         public string PDFRoute { get; set; }
+        public bool firmado { get; set; }
 
         public IFormFile Pdf { get; set; }
     }

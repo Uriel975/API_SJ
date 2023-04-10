@@ -15,6 +15,7 @@ namespace APIServices.Domain.Entities
         public string Serie { get; set; }
         public int? Fkempresa { get; set; }
         public string PDFRoute { get; set; }
+        public bool firmado { get; set; }
 
         public virtual ClienteEmpresa FkempresaNavigation { get; set; }
         public virtual EntregasPs EntregasPs { get; set; }

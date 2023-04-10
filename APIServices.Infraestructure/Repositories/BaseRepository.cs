@@ -21,10 +21,10 @@ namespace APIServices.Infraestructure.Repositories
         }
 
         //Modificaciones
-        public async Task<IEnumerable<T>> GetAll()
+        public IEnumerable<T> GetAll()
         {
 
-            return await _entities.AsNoTracking().ToListAsync();
+            return _entities.AsEnumerable();
         }
 
         public async Task<T> GetById(int id)

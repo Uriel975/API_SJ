@@ -1,6 +1,9 @@
-﻿using APIServices.Domain.Entities;
+﻿using APIServices.Domain.Adapter;
+using APIServices.Domain.Entities;
 using APIServices.Domain.Exceptions;
 using APIServices.Domain.Services;
+using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,9 +27,9 @@ namespace APIServices.Infraestructure.Repositories
 
         #region Usuarios
 
-        public async Task<IEnumerable<Usuarios>> GetUsuarios()
+        public IEnumerable<Usuarios> GetUsuarios()
         {
-            return await _unitofWork.UsersRepository.GetAll();
+            return _unitofWork.UsersRepository.GetAll();
         }
 
         public async Task<Usuarios> GetIdUsuario(int Id)
@@ -98,7 +101,7 @@ namespace APIServices.Infraestructure.Repositories
         #region ClienteEmpresa 
         // ========= Parte de ClienteEmpresa ==========
 
-        public Task<IEnumerable<ClienteEmpresa>> GetCliente()
+        public IEnumerable<ClienteEmpresa> GetCliente()
         {
             return _unitofWork.ClienteEmpRepository.GetAll();
         }
@@ -165,9 +168,12 @@ namespace APIServices.Infraestructure.Repositories
 
 
         #region Orden Compra
-        public Task<IEnumerable<OrdenCompra>> GetOrden()
+        public IEnumerable<OrdenCompra> GetOrden()
         {
-            return _unitofWork.OrdenCompraRepository.GetAll();
+            var orden = _unitofWork.OrdenCompraRepository.GetAll();
+            orden = orden.Where(x => x.firmado == false);
+            return orden;
+            //return _unitofWork.OrdenCompraRepository.GetAll();
         }
 
         public async Task<OrdenCompra> GetIdOrden(int IdOrden)
@@ -226,7 +232,7 @@ namespace APIServices.Infraestructure.Repositories
 
         #region ENTREGAS PS
         // ========= ENTREGAS PS ==========
-        public Task<IEnumerable<EntregasPs>> GetEntregas()
+        public IEnumerable<EntregasPs> GetEntregas()
         {
             return _unitofWork.EntregasPSRespository.GetAll();
         }
@@ -255,6 +261,87 @@ namespace APIServices.Infraestructure.Repositories
             await _unitofWork.EntregasPSRespository.Delete(idEntrega);
             int rows = await _unitofWork.SaveChangesAsync();
             return rows > 0;
+        }
+        public async Task<bool> Firma(DatePdf datePdf)
+        {
+
+            string pathNewDocument = Name(datePdf.RoutePdf);
+
+            //Toma el PDF 
+            PdfReader reader = new PdfReader(datePdf.RoutePdf);
+            using (FileStream fs = new FileStream(pathNewDocument, FileMode.Create))
+            {
+                // Permite la edicion del PDF
+                PdfStamper stamper = new PdfStamper(reader, fs);
+
+                // Toma la pagina a editar
+                PdfImportedPage page = stamper.GetImportedPage(reader, 1);
+                PdfContentByte contentByte = stamper.GetOverContent(1);
+                byte[] pdfbytes = await ConvertirABytes(datePdf.Firma);
+                // Cargar la imagen
+                iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(pdfbytes);
+                image.SetAbsolutePosition(246, 75);
+                image.ScaleAbsolute(120, 120);
+                //image.SetAbsolutePosition(450, 675);
+                //image.ScaleAbsolute(120, 120);
+
+                //Agregamos la imagen
+                contentByte.AddImage(image);
+
+                //Cerrar
+                stamper.Close();
+            }
+
+            // Causante del problema
+            //var orden = _unitofWork.OrdenCompraRepository.GetAll();
+            //orden = orden.Where(x => x.Folio == datePdf.Folio);
+            //if(orden != null)
+            //{
+            //    EntregasPs nuevaEntrega = new EntregasPs();
+            //    nuevaEntrega.EstadoEntrega = datePdf.EstadoEntrega;
+            //    nuevaEntrega.FechaEntrega = datePdf.FechaEntrega;
+            //    nuevaEntrega.Observaciones = datePdf.Observaciones;
+            //    nuevaEntrega.Fkfolio = datePdf.Folio;
+            //    await _unitofWork.EntregasPSRespository.Add(nuevaEntrega);
+
+                
+            //    foreach(OrdenCompra ordenCompra1 in orden){
+            //        OrdenCompra ordenCompra = new OrdenCompra();
+
+            //        ordenCompra = ordenCompra1;
+            //        ordenCompra.PDFRoute = pathNewDocument;
+            //        ordenCompra.firmado = true;
+            //        await _unitofWork.OrdenCompraRepository.Update(ordenCompra);
+            //    }
+            //    _unitofWork.SaveChanges();
+                
+            //}
+            return true;
+        }
+        public async Task<byte[]> ConvertirABytes(IFormFile archivo)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                await archivo.CopyToAsync(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
+        public static string Name(string fileDocument)
+        {
+            string name = Path.GetFileName(fileDocument);
+            string[] sepatorName = name.Split(".");
+            sepatorName[0] += "_FIRMADO.";
+            string full = String.Empty;
+
+            for (int i = 0; i < sepatorName.Count(); i++)
+            {
+                full += sepatorName[i];
+            }
+
+            string nuevaRutaArchivo = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\", full);
+
+
+            return nuevaRutaArchivo;
         }
 
 

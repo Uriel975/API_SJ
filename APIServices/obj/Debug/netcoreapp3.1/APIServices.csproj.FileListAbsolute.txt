@@ -233,3 +233,5 @@ D:\Prueba API\JordanApi\APIServices\APIServices\obj\Debug\netcoreapp3.1\APIServi
 D:\Prueba API\JordanApi\APIServices\APIServices\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+D:\Prueba API\JordanApi\APIServices\APIServices\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\Prueba API\JordanApi\APIServices\APIServices\bin\Debug\netcoreapp3.1\itextsharp.dll

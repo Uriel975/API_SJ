@@ -62,7 +62,8 @@ namespace APIServices
             //services.AddTransient<IUsuarios, UsuarioRepository>();
             services.AddTransient<IService, Service>();
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 
             services.AddMvc(options => 

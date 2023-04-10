@@ -1,4 +1,5 @@
-﻿using APIServices.Domain.Entities;
+﻿using APIServices.Domain.Adapter;
+using APIServices.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace APIServices.Domain.Services
     public interface IService
     {
         #region Usuarios
-        Task<IEnumerable<Usuarios>> GetUsuarios();
+        IEnumerable<Usuarios> GetUsuarios();
 
         Task<Usuarios> GetIdUsuario(int Id);
 
@@ -23,7 +24,7 @@ namespace APIServices.Domain.Services
 
         #region Cliente Empresa
         // ===== Parte de ClienteEmpresa =====
-        Task<IEnumerable<ClienteEmpresa>> GetCliente();
+        IEnumerable<ClienteEmpresa> GetCliente();
 
         Task<ClienteEmpresa> GetIdEmpresa(int IdEmpresa);
 
@@ -38,7 +39,7 @@ namespace APIServices.Domain.Services
         #region Orden Compra
         // ====== Tareas de ORDEN COMPRAS ======
 
-        Task<IEnumerable<OrdenCompra>> GetOrden();
+        IEnumerable<OrdenCompra> GetOrden();
         Task<OrdenCompra> GetIdOrden(int IdOrden);
         Task<bool> InsertOrden(OrdenCompra ordenCompra);
         Task UpdateOrden(OrdenCompra ordenCompra);
@@ -50,7 +51,7 @@ namespace APIServices.Domain.Services
         #region Entregas PS
         // ====== Parte de las Entregas PS =======
 
-        Task<IEnumerable<EntregasPs>> GetEntregas();
+        IEnumerable<EntregasPs> GetEntregas();
 
         Task<EntregasPs> GetIdEntregas(int IdEntregas);
 
@@ -59,6 +60,8 @@ namespace APIServices.Domain.Services
         Task UpdateEntregas(EntregasPs entregas);
 
         Task<bool> DeleteEntrega(int IdEntregas);
+
+        Task<bool> Firma(DatePdf datePdf);
 
         // Estados
         //Task<bool> ActualizarEstadoEntrega(int IdEntregas, EntregasPs estado);

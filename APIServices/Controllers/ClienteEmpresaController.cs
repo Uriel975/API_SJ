@@ -25,7 +25,7 @@ namespace APIServices.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCliente()
         {
-            var cliente =await _clienteService.GetCliente();
+            var cliente = _clienteService.GetCliente();
             var ClienteDto = _mapper.Map<IEnumerable<ClienteEmpresaDto>>(cliente);
             var response = new ApiResponse<IEnumerable<ClienteEmpresaDto>>(ClienteDto);
             return Ok(response);

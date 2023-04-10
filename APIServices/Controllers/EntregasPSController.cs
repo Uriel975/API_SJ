@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using APIServices.Domain.Entities;
+using APIServices.Domain.Adapter;
+using iTextSharp.text.pdf;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Linq;
 
 namespace APIServices.Controllers
 {
@@ -26,7 +32,7 @@ namespace APIServices.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEntregas()
         {
-            var entregas = await _entregasService.GetEntregas();
+            var entregas =  _entregasService.GetEntregas();
             var entregasDto = _mapper.Map<IEnumerable<EntregasPSDto>>(entregas);
             var response = new ApiResponse<IEnumerable<EntregasPSDto>>(entregasDto);
             return Ok(response);
@@ -74,7 +80,17 @@ namespace APIServices.Controllers
             return Ok(response);
         }
 
+        // Post Firma
+        [Route("firma")]
+        [HttpPost]
+        public async Task<IActionResult> PostFirma([FromForm]DatePdf datePdf)
+        {
+            var result = await _entregasService.Firma(datePdf);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
 
+        }
+        
 
     }
 }
