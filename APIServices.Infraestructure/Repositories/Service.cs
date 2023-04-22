@@ -190,11 +190,11 @@ namespace APIServices.Infraestructure.Repositories
         //Agregar una nueva Orden Compra
         public async Task<bool> InsertOrden(OrdenCompra ordenCompra)
         {
-            Expression<Func<OrdenCompra, bool>> expression = item => item.Folio == ordenCompra.Folio;
+            Expression<Func<OrdenCompra, bool>> expression = item => item.Folio == ordenCompra.Folio && item.Fkempresa == ordenCompra.Fkempresa;
             var listOrden = await _unitofWork.OrdenCompraRepository.FindByCondition(expression);
-            if (listOrden.Any(item => item.Folio == ordenCompra.Folio))
+            if (listOrden.Any(item => item.Folio == ordenCompra.Folio && item.Fkempresa == ordenCompra.Fkempresa))
             {
-                throw new Exception("El Folio Ya Existe, Agregue otro");
+                throw new Exception("Este folio ya fue registrado por la empresa");
             }
 
             await _unitofWork.OrdenCompraRepository.Add(ordenCompra);
@@ -265,6 +265,7 @@ namespace APIServices.Infraestructure.Repositories
         public async Task<bool> Firma(DatePdf datePdf)
         {
 
+            //Toma el PDF 
             string pathNewDocument = Name(datePdf.RoutePdf);
 
             //Toma el PDF 
@@ -282,41 +283,51 @@ namespace APIServices.Infraestructure.Repositories
                 iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(pdfbytes);
                 image.SetAbsolutePosition(246, 75);
                 image.ScaleAbsolute(120, 120);
-                //image.SetAbsolutePosition(450, 675);
-                //image.ScaleAbsolute(120, 120);
 
                 //Agregamos la imagen
                 contentByte.AddImage(image);
 
+                // Cargar la imagen del logo
+                string rutaLogo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/logo", "logoPs.png"); // Actualiza con la ruta correcta
+                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance(rutaLogo);
+                logo.SetAbsolutePosition(28, 28); // Configurar la posición del logo
+                logo.ScaleAbsolute(80, 50); // Configurar el tamaño del logo
+
+                // Agregar el logo al contenido de la página del PDF
+                contentByte.AddImage(logo);
+
                 //Cerrar
                 stamper.Close();
+
+                //eliminar documento viejo
+                //File.Delete(datePdf.RoutePdf);
+
             }
 
-            // Causante del problema
-            //var orden = _unitofWork.OrdenCompraRepository.GetAll();
-            //orden = orden.Where(x => x.Folio == datePdf.Folio);
-            //if(orden != null)
-            //{
-            //    EntregasPs nuevaEntrega = new EntregasPs();
-            //    nuevaEntrega.EstadoEntrega = datePdf.EstadoEntrega;
-            //    nuevaEntrega.FechaEntrega = datePdf.FechaEntrega;
-            //    nuevaEntrega.Observaciones = datePdf.Observaciones;
-            //    nuevaEntrega.Fkfolio = datePdf.Folio;
-            //    await _unitofWork.EntregasPSRespository.Add(nuevaEntrega);
 
-                
-            //    foreach(OrdenCompra ordenCompra1 in orden){
-            //        OrdenCompra ordenCompra = new OrdenCompra();
+            var ordens = _unitofWork.OrdenCompraRepository.GetAll();
+            var orden = ordens.FirstOrDefault(x => x.Folio == datePdf.Folio);
 
-            //        ordenCompra = ordenCompra1;
-            //        ordenCompra.PDFRoute = pathNewDocument;
-            //        ordenCompra.firmado = true;
-            //        await _unitofWork.OrdenCompraRepository.Update(ordenCompra);
-            //    }
-            //    _unitofWork.SaveChanges();
-                
-            //}
+
+            if (orden != null)
+            {
+                var nuevaEntrega = new EntregasPs();
+                nuevaEntrega.EstadoEntrega = datePdf.EstadoEntrega;
+                nuevaEntrega.FechaEntrega = datePdf.FechaEntrega;
+                nuevaEntrega.Observaciones = datePdf.Observaciones;
+                nuevaEntrega.Fkfolio = datePdf.Folio;
+                //nuevaEntrega.Pdfurl = pathNewDocument;
+                await _unitofWork.EntregasPSRespository.Add(nuevaEntrega);
+
+                orden.PDFRoute = pathNewDocument != "" ? "~/" + Path.GetFileName(pathNewDocument) : "";
+                //orden.PDFRoute = pathNewDocument != "" ? "~/" + Path.GetFileName(pathNewDocument) : "";
+                orden.firmado = true;
+                await _unitofWork.OrdenCompraRepository.Update(orden);
+                _unitofWork.SaveChanges();
+
+            }
             return true;
+
         }
         public async Task<byte[]> ConvertirABytes(IFormFile archivo)
         {
@@ -328,7 +339,8 @@ namespace APIServices.Infraestructure.Repositories
         }
         public static string Name(string fileDocument)
         {
-            string name = Path.GetFileName(fileDocument);
+            string name = Path.GetFileName(fileDocument).Replace("%20", " ");
+
             string[] sepatorName = name.Split(".");
             sepatorName[0] += "_FIRMADO.";
             string full = String.Empty;
@@ -338,7 +350,7 @@ namespace APIServices.Infraestructure.Repositories
                 full += sepatorName[i];
             }
 
-            string nuevaRutaArchivo = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\", full);
+            string nuevaRutaArchivo = Path.Combine(Directory.GetCurrentDirectory() + "\\wwwroot\\Firmados\\", full);
 
 
             return nuevaRutaArchivo;

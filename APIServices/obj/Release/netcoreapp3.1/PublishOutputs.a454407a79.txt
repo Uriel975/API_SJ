@@ -1,4 +1,5 @@
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\APIServices.exe
+D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\logo\logoPs.png
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\PDFs\COMPRAS 11002_487f3f5b-b676-4b20-bfa1-5dea527f0881.pdf
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\PDFs\COMPRAS 11002_5799b002-0da1-4566-8704-40af6f44fbba.pdf
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\PDFs\COMPRAS 11002_ac7fb51b-6888-4ac9-b328-0abfdde027c1.pdf
@@ -10,9 +11,11 @@ D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\APIServices.pdb
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\AutoMapper.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\BouncyCastle.Crypto.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\FluentValidation.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\FluentValidation.AspNetCore.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
+D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\itextsharp.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Http.Features.dll
 D:\Prueba API\JordanApi\APIServices\APIServices\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.JsonPatch.dll
