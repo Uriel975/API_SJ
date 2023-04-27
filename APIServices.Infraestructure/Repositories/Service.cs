@@ -319,7 +319,7 @@ namespace APIServices.Infraestructure.Repositories
                 //nuevaEntrega.Pdfurl = pathNewDocument;
                 await _unitofWork.EntregasPSRespository.Add(nuevaEntrega);
 
-                orden.PDFRoute = pathNewDocument != "" ? "~/" + Path.GetFileName(pathNewDocument) : "";
+                orden.PDFRoute = pathNewDocument != "" ? "~/Firmados" + Path.GetFileName(pathNewDocument) : "";
                 //orden.PDFRoute = pathNewDocument != "" ? "~/" + Path.GetFileName(pathNewDocument) : "";
                 orden.firmado = true;
                 await _unitofWork.OrdenCompraRepository.Update(orden);
