@@ -22,13 +22,11 @@ namespace APIServices.Controllers
     {
         private readonly IService _entregasService;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _webHost;
 
-        public EntregasPSController(IService EntregasPS, IMapper mapper, IWebHostEnvironment webHost)
+        public EntregasPSController(IService EntregasPS, IMapper mapper)
         {
             _entregasService = EntregasPS;
             _mapper = mapper;
-            _webHost = webHost;
 
         }
 

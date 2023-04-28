@@ -319,7 +319,7 @@ namespace APIServices.Infraestructure.Repositories
                 nuevaEntrega.Pdfurl = pathNewDocument;
                 await _unitofWork.EntregasPSRespository.Add(nuevaEntrega);
 
-                orden.PDFRoute = pathNewDocument != "" ? "~/Firmados" + Path.GetFileName(pathNewDocument) : "";
+                orden.PDFRoute = pathNewDocument != "" ? "~/" + Path.GetFileName(pathNewDocument) : "";
                 //orden.PDFRoute = pathNewDocument != "" ? "~/" + Path.GetFileName(pathNewDocument) : "";
                 orden.firmado = true;
                 await _unitofWork.OrdenCompraRepository.Update(orden);
@@ -329,6 +329,7 @@ namespace APIServices.Infraestructure.Repositories
             return true;
 
         }
+        
         public async Task<byte[]> ConvertirABytes(IFormFile archivo)
         {
             using (var memoryStream = new MemoryStream())
@@ -355,6 +356,7 @@ namespace APIServices.Infraestructure.Repositories
 
             return nuevaRutaArchivo;
         }
+
 
         public IEnumerable<EntregasPs> GetDocFirmado()
         {

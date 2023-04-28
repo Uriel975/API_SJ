@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DTOs\OrdenCompraDto.cs~RF4acc02.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Enumeration\" />
   </ItemGroup>
 
