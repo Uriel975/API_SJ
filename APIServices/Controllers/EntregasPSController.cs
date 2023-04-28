@@ -12,6 +12,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
 
 namespace APIServices.Controllers
 {
@@ -21,11 +22,13 @@ namespace APIServices.Controllers
     {
         private readonly IService _entregasService;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _webHost;
 
-        public EntregasPSController(IService EntregasPS, IMapper mapper)
+        public EntregasPSController(IService EntregasPS, IMapper mapper, IWebHostEnvironment webHost)
         {
             _entregasService = EntregasPS;
             _mapper = mapper;
+            _webHost = webHost;
 
         }
 
@@ -37,6 +40,28 @@ namespace APIServices.Controllers
             var response = new ApiResponse<IEnumerable<EntregasPSDto>>(entregasDto);
             return Ok(response);
         }
+
+
+        [Route("routePdf/")]
+        [HttpGet]
+        public async Task<IActionResult> GetDocFirmado()
+        {
+            var entregas = _entregasService.GetDocFirmado();
+            var entregasDto = _mapper.Map<IEnumerable<EntregasPSDto>>(entregas);
+            var response = new ApiResponse<IEnumerable<EntregasPSDto>>(entregasDto);
+            return Ok(response);
+
+            //var rutaPdf = _entregasService.GetEntregas();
+            //var datePdfs = _mapper.Map<IEnumerable<DatePdf>>(rutaPdf);
+            //for (int i = 0; i < datePdfs.Count(); i++)
+            //{
+            //    datePdfs.ElementAt(i).RoutePdf = datePdfs.ElementAt(i).RoutePdf == null ? "" : datePdfs.ElementAt(i).RoutePdf.Replace("~", Request.Host.Value);
+            //}
+
+        }
+
+
+
 
         [HttpGet("{IdEntrega}")]
         public async Task<IActionResult> GetId(int IdEntrega)

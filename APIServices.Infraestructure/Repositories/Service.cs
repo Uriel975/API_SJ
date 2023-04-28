@@ -356,6 +356,11 @@ namespace APIServices.Infraestructure.Repositories
             return nuevaRutaArchivo;
         }
 
+        public IEnumerable<EntregasPs> GetDocFirmado()
+        {
+            return _unitofWork.EntregasPSRespository.GetAll();
+        }
+
 
 
         #endregion

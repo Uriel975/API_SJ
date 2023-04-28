@@ -53,6 +53,8 @@ namespace APIServices.Domain.Services
 
         IEnumerable<EntregasPs> GetEntregas();
 
+        IEnumerable<EntregasPs> GetDocFirmado();
+
         Task<EntregasPs> GetIdEntregas(int IdEntregas);
 
         Task<bool> InsertEntregas(EntregasPs entregasPs);
