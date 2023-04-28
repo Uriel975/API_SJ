@@ -38,7 +38,7 @@ namespace APIServices.Infraestructure.Data.Configuration
 
             builder.Property(e => e.Pdfurl)
                 .HasColumnName("PDFUrl")
-                .HasMaxLength(250);
+                .HasMaxLength(500);
 
             builder.HasOne(d => d.FkfolioNavigation)
                 .WithOne(p => p.EntregasPs)

@@ -13,7 +13,7 @@ namespace APIServices.Domain.Entities
         public string Observaciones { get; set; }
         public string Foto { get; set; }
         public string EstadoEntrega { get; set; }
-        public byte[] Pdfurl { get; set; }
+        public string Pdfurl { get; set; }
         public string Fkfolio { get; set; }
 
         public virtual OrdenCompra FkfolioNavigation { get; set; }
